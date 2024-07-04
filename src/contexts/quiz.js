@@ -1,24 +1,24 @@
-import {createContext,useReducer} from 'react'
-import questions from '../data'
+import { createContext, useReducer } from "react";
 
 const initialState = {
-    currentQuestionIndex: 0,
-    questions: [],
-    
+  currentQuestionIndex: 0,
+  questions: [],
 };
 
-const reducer = (state,action) => {
-    if (action.type === "NEXT_QUESTION"){
-        // const currentQuestionIndex = state.currentQuestionIndex + 1
-        console.log("Hellllo")
+const reducer = (state, action) => {
+  if (action.type === "NEXT_QUESTION") {
+    return {
+      ...state,
+      currentQuestionIndex: state.currentQuestionIndex + 1,
+    };
+  }
+  return state;
+};
 
-    }
-}
+export const QuizContext = createContext();
 
-export const QuizContext = createContext()
-
-export const QuizProvider = ({children}) => {
-    const value = useReducer(reducer,initialState);
-
-    return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>
-}
+export const QuizProvider = ({ children }) => {
+  const value = useReducer(reducer, initialState);
+  console.log("state", value);
+  return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;
+};
